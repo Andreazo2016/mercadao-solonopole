@@ -8,4 +8,9 @@ const routes = Router();
 routes.use('/salesmans', SalesmanRouter);
 routes.use('/sessions', SessionsRouter);
 
+
+routes.get('/', (request, response) => {
+    return response.json({ ok: true });
+})
+
 export default routes;
