@@ -27,8 +27,6 @@ class AuthenticateService {
             user,
             token
         }
-
-
     }
 }
 
