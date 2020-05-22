@@ -10,12 +10,12 @@ PostRouter.post('/', upload.single('file'), async (request, response) => {
 
   const { filename } = request.file;
   const { name, description, categorie_id, price } = request.body;
-  const { user_id } = request.headers;
+  const userId = request.userId;
 
   try {
     const createPostService = new CreatePostService();
 
-    const { post } = await createPostService.execute({ user_id, filename, name, description, categorie_id, price })
+    const { post } = await createPostService.execute({ userId ,filename, name, description, categorie_id, price })
 
     return response.json(post);
 

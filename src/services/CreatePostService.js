@@ -1,7 +1,7 @@
 import Post from '../schemas/Post';
 
 class CreatePostService {
-  async execute({ user_id ,filename, name, description, categorie_id, price }) {
+  async execute({ userId ,filename, name, description, categorie_id, price }) {
 
     const post = await Post.create({
         file: filename,
@@ -9,7 +9,7 @@ class CreatePostService {
         description,
         price,
         categorie: categorie_id,
-        user: user_id,
+        user: userId,
     })
 
     await post.populate('categorie').populate('user').execPopulate();

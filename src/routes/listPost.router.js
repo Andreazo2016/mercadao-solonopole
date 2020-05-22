@@ -5,7 +5,7 @@ const ListPostRouter = Router();
 
 ListPostRouter.get('/', async (request, response) => {
 
-  const { user_id } = request.headers;
+  const user_id = request.userId;
 
   try {
     const listPostService = new ListPostService();
