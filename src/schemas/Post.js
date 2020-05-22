@@ -21,6 +21,13 @@ const PostSchema = mongoose.Schema({
     }
 }, {
     timestamps: true,
+    toJSON: {
+      virtuals : true,
+    }
+})
+
+PostSchema.virtual('file_url').get(function() {
+  return `http://localhost:3333/files/${this.file}`
 })
 
 export default mongoose.model('Post', PostSchema)

@@ -17,7 +17,7 @@ PostRouter.post('/', upload.single('file'), async (request, response) => {
 
     const { post } = await createPostService.execute({ user_id, filename, product, description, categorie, price })
 
-    return response.json(post)
+    return response.json(post);
 
   } catch (error) {
     return response.status(400).json({
