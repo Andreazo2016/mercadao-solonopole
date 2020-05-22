@@ -10,7 +10,7 @@ ListPostRouter.get('/', async (request, response) => {
   try {
     const listPostService = new ListPostService();
 
-    const { post } = await listPostService.execute({ user_id })
+    const { post } = await listPostService.execute({ user_id });
 
     return response.json(post);
 

@@ -11,7 +11,8 @@ const PostSchema = mongoose.Schema({
         required: true
     },
     categorie: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Categorie',
         required: true,
     },
     price: Number,

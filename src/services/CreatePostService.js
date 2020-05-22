@@ -1,22 +1,21 @@
-import User from '../schemas/User';
 import Post from '../schemas/Post';
 
-class CriatePostService {
-  async execute({ user_id ,filename, product, description, categorie, price }) {
+class CreatePostService {
+  async execute({ user_id ,filename, product, description, categorie_id, price }) {
 
     const post = await Post.create({
         file: filename,
         product,
         description,
-        categorie,
         price,
+        categorie: categorie_id,
         user: user_id,
     })
 
-    await post.populate('user').execPopulate();
+    await post.populate('categorie').populate('user').execPopulate();
 
     return { post };
   }
 }
 
-export default CriatePostService;
+export default CreatePostService;
