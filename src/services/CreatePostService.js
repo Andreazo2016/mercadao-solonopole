@@ -1,11 +1,11 @@
 import Post from '../schemas/Post';
 
 class CreatePostService {
-  async execute({ user_id ,filename, product, description, categorie_id, price }) {
+  async execute({ user_id ,filename, name, description, categorie_id, price }) {
 
     const post = await Post.create({
         file: filename,
-        product,
+        name,
         description,
         price,
         categorie: categorie_id,

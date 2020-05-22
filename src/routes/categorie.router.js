@@ -5,12 +5,12 @@ const CategorieRouter = Router();
 
 CategorieRouter.post('/',  async (request, response) => {
 
-  const { categorie_name } = request.body;
+  const { name } = request.body;
 
   try {
     const createCategorieService = new CreateCategorieService();
 
-    const { new_categorie } = await createCategorieService.execute({ categorie_name });
+    const { new_categorie } = await createCategorieService.execute({ name });
 
     return response.json(new_categorie);
 

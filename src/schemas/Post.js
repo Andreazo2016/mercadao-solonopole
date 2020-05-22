@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 const PostSchema = mongoose.Schema({
     file: String,
-    product: {
+    name: {
         type: String,
         required: true
     },

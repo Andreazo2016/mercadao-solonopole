@@ -9,13 +9,13 @@ const upload = multer(multerConfig);
 PostRouter.post('/', upload.single('file'), async (request, response) => {
 
   const { filename } = request.file;
-  const { product, description, categorie_id, price } = request.body;
+  const { name, description, categorie_id, price } = request.body;
   const { user_id } = request.headers;
 
   try {
     const createPostService = new CreatePostService();
 
-    const { post } = await createPostService.execute({ user_id, filename, product, description, categorie_id, price })
+    const { post } = await createPostService.execute({ user_id, filename, name, description, categorie_id, price })
 
     return response.json(post);
 

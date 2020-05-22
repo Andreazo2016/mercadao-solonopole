@@ -1,10 +1,10 @@
 import Categorie from '../schemas/Categorie';
 
 class CreateCategorieService {
-  async execute({ categorie_name }) {
+  async execute({ name }) {
 
     const new_categorie = await Categorie.create({
-      categorie_name,
+      name,
     })
 
     return { new_categorie };
