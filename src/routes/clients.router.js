@@ -24,7 +24,6 @@ ClientRouter.get('/posts-by-category', async (request, response) => {
     const { category } = request.query
   
     try {
-      console.log(category)
       const listPostByCategoriesService = new ListPostByCategoriesService();
   
       const posts = await listPostByCategoriesService.execute({ category_id: category });
