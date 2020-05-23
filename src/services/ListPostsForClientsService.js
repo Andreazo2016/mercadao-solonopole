@@ -8,7 +8,7 @@ class ListPostsForClientsService {
             populate: {
                 path: 'avatar'
             }
-        })
+        }).sort({ createdAt: 'desc'})
         return posts
     }
 }
