@@ -7,7 +7,7 @@ export default async (request, response, next) => {
   const authHeads = request.headers.authorization;
 
   if (!authHeads) {
-    return res.status(401).json({ error: 'Token not provider' })
+    return response.status(401).json({ error: 'Token not provider' })
   }
 
   const [, token] = authHeads.split(' ');
@@ -15,7 +15,6 @@ export default async (request, response, next) => {
   try {
 
     const decoded = await promisify(jwt.verify)(token, authConfig.jwt.secret);
-    console.log(decoded.id)
     
     request.userId = decoded.id;
 
