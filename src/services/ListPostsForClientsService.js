@@ -3,7 +3,9 @@ import Post from '../schemas/Post';
 class ListPostsForClientsService {
 
     async execute() {
-        const posts = await Post.find({}).populate({
+        const posts = await Post.find({})
+        .populate('categorie')
+        .populate({
             path: 'user',
             populate: {
                 path: 'avatar'
