@@ -1,9 +1,10 @@
 import { Router } from 'express';
 import CreateCategorieService from '../services/CreateCategorieservice';
+import ListCategorieService from '../services/ListCategorieService';
 const CategorieRouter = Router();
 
 
-CategorieRouter.post('/',  async (request, response) => {
+CategorieRouter.post('/', async (request, response) => {
 
   const { name } = request.body;
 
@@ -17,7 +18,25 @@ CategorieRouter.post('/',  async (request, response) => {
   } catch (error) {
     return response.status(400).json({
       message: error.message
-  })
+    })
+  }
+
+})
+
+CategorieRouter.get('/', async (request, response) => {
+
+
+  try {
+    const listCategorieService = new ListCategorieService();
+
+    const { categorie } = await listCategorieService.execute();
+
+    return response.json(categorie);
+
+  } catch (error) {
+    return response.status(400).json({
+      message: error.message
+    })
   }
 
 })

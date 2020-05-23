@@ -6,7 +6,7 @@ import authConfig from '../config/auth';
 class AuthenticateService {
 
     async execute({ email, password }) {
-        const user = await User.findOne({ email });
+        const user = await User.findOne({ email }).populate('avatar');
 
         if (!user) {
             throw new Error('User not exists');
@@ -20,7 +20,7 @@ class AuthenticateService {
 
         const { secret, expiresIn } = authConfig.jwt;
 
-        
+    
         const token = jwt.sign({ id: user._id, role: user.role }, secret, { expiresIn });
 
         return {

@@ -19,6 +19,10 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    avatar: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Avatar'
+    },
     role: {
         type: String,
         enum: ['administrator', 'client', 'salesman']
@@ -34,7 +38,7 @@ UserSchema.pre('save', async function () {
 })
 
 UserSchema.set('toJSON', {
-    transform: function(doc, ret, opt) {
+    transform: function (doc, ret, opt) {
         delete ret['password']
         return ret
     }
