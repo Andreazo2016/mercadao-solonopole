@@ -5,6 +5,7 @@ import PostRouter from './post.router';
 import CategorieRouter from './categorie.router';
 import ClientRouter from './clients.router';
 import AvatarRouter from './avatar.router';
+import Newsletter from './newsletter.router';
 
 
 
@@ -15,6 +16,7 @@ routes.use('/salesmans', SalesmanRouter);
 routes.use('/sessions', SessionsRouter);
 routes.use('/categories', CategorieRouter);
 routes.use('/clients', ClientRouter);
+routes.use('/newsletters', Newsletter);
 
 
 routes.use('/posts' ,PostRouter);

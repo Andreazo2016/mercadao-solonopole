@@ -1,4 +1,6 @@
 import User from '../schemas/User';
+import Plan from '../schemas/Plan';
+import Subscription from '../schemas/Subscription';
 
 class CreateSalesmanService {
 
@@ -16,6 +18,13 @@ class CreateSalesmanService {
             role,
             contact,
             password
+        })
+
+        const startedPlan = await Plan.findOne({ type: 'started' })
+
+        await Subscription.create({
+            user: salesman._id,
+            plan: startedPlan._id
         })
 
         return { salesman };

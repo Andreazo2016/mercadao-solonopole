@@ -10,10 +10,11 @@ const upload = multer(multerConfig);
 
 
 AvatarRouter.post('/',AuthMiddleware ,upload.single('file'),async (request, response) => {
-    const { originalname, path } = request.file;
+    const { filename, path } = request.file;
+
     try {
         const createAvatarService = new CreateAvatarService();
-        const avatar = await createAvatarService.execute({ originalname, path });
+        const avatar = await createAvatarService.execute({ filename, path });
         return response.json(avatar);
 
     } catch (error) {

@@ -1,9 +1,9 @@
 import Avatar from '../schemas/Avatar';
 class CreateAvatarService {
 
-    async execute({ originalname, path }) {
+    async execute({ filename, path }) {
         const avatar = await Avatar.create({
-            name: originalname,
+            name: filename,
             path: path
         })
 
