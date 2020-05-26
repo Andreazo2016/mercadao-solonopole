@@ -6,6 +6,7 @@ import CategorieRouter from './categorie.router';
 import ClientRouter from './clients.router';
 import AvatarRouter from './avatar.router';
 import Newsletter from './newsletter.router';
+import Contact from './contact.router';
 
 
 
@@ -17,6 +18,7 @@ routes.use('/sessions', SessionsRouter);
 routes.use('/categories', CategorieRouter);
 routes.use('/clients', ClientRouter);
 routes.use('/newsletters', Newsletter);
+routes.use('/contacts', Contact);
 
 
 routes.use('/posts' ,PostRouter);

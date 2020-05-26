@@ -15,7 +15,7 @@ salesmansRouter.post('/', async (request, response) => {
         name: Yup.string().required(),
         contact: Yup.string().required(),
         email: Yup.string().email().required(),
-        role: Yup.string().email().required(),
+        role: Yup.string().required(),
         password: Yup.string().required().min(6),
 
     });
