@@ -12,7 +12,7 @@ const PostRouter = Router();
 const upload = multer(multerConfig);
 
 
-PostRouter.get('/',AuthMiddleware, async (request, response) => {
+PostRouter.get('/', AuthMiddleware, async (request, response) => {
 
   const user_id = request.userId;
 
@@ -35,22 +35,22 @@ PostRouter.get('/',AuthMiddleware, async (request, response) => {
 
 PostRouter.post('/', AuthMiddleware, upload.single('file'), async (request, response) => {
 
-  const { filename } = request.file;
-  const { name, description, categorie_id, price } = request.body;
-  const userId = request.userId;
+    const { filename } = request.file;
+    const { name, description, categorie_id, price } = request.body;
+    const userId = request.userId;
 
-  try {
-    const createPostService = new CreatePostService();
+    try {
+        const createPostService = new CreatePostService();
 
-    const { post } = await createPostService.execute({ userId, filename, name, description, categorie_id, price })
+        const { post } = await createPostService.execute({ userId, filename, name, description, categorie_id, price })
 
-    return response.json(post);
+        return response.json(post);
 
-  } catch (error) {
-    return response.status(400).json({
-      message: error.message
-    })
-  }
+    } catch (error) {
+      return response.status(400).json({
+        message: error.message
+      })
+    }
 
 })
 
