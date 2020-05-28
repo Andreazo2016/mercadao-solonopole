@@ -5,7 +5,7 @@ import CreateNewsLetterService from '../services/CreateNewsLetterService';
 const NewsletterRouter = Router();
 
 
-NewsletterRouter.get('/newsletters', async (request, response) => {
+NewsletterRouter.post('/', async (request, response) => {
 
     try {
         const schema = Yup.object().shape({
