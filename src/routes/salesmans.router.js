@@ -13,6 +13,7 @@ salesmansRouter.post('/', async (request, response) => {
 
     const schema = Yup.object().shape({
         name: Yup.string().required(),
+        username: Yup.string().required(),
         contact: Yup.string().required(),
         email: Yup.string().email().required(),
         role: Yup.string().required(),
@@ -23,11 +24,11 @@ salesmansRouter.post('/', async (request, response) => {
     try {
         await schema.validate(request.body);
 
-        const { name, email, role, contact, password } = request.body;
+        const { name,username, email, role, contact, password } = request.body;
 
         const createSalesmanService = new CreateSalesmanService();
 
-        const { salesman } = await createSalesmanService.execute({ name, email, role, contact, password });
+        const { salesman } = await createSalesmanService.execute({ name,username, email, role, contact, password });
 
         return response.json(salesman)
 
@@ -99,6 +100,7 @@ salesmansRouter.put('/', AuthMiddleware, async (request, response) => {
 
     const schema = Yup.object().shape({
         name: Yup.string(),
+        username: Yup.string(),
         contact: Yup.string(),
         email: Yup.string().email()
     });

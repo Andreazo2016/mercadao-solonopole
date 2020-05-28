@@ -4,7 +4,7 @@ import Subscription from '../schemas/Subscription';
 
 class CreateSalesmanService {
 
-    async execute({ name, email, role, contact, password }) {
+    async execute({ name,username, email, role, contact, password }) {
 
         const user = await User.findOne({ email });
 
@@ -14,6 +14,7 @@ class CreateSalesmanService {
 
         const salesman = await User.create({
             name,
+            username,
             email,
             role,
             contact,
