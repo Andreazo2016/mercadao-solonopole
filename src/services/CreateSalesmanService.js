@@ -21,12 +21,14 @@ class CreateSalesmanService {
             password
         })
 
+        /*
         const startedPlan = await Plan.findOne({ type: 'started' })
 
         await Subscription.create({
             user: salesman._id,
             plan: startedPlan._id
         })
+        */
 
         return { salesman };
 
