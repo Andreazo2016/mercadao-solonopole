@@ -12,16 +12,15 @@ NewsletterRouter.post('/', async (request, response) => {
             email: Yup.string().email('Invalid email format').required('Email is required')
         })
 
-        await schema.validate(data)
+        await schema.validate(request.body)
 
         const createNewsLetterService = new CreateNewsLetterService()
 
         const newsletters = await createNewsLetterService.execute(request.body)
-
-        return newsletters
+    
+        return response.json(newsletters)
 
     } catch (error) {
-
         return response.status(400)
             .json({
                 message: 'Erro ao criar newsletter'
