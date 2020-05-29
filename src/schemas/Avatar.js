@@ -10,17 +10,13 @@ const AvatarSchema = new Schema({
         type: String,
         required: true,
     },
-    path: {
+    url: {
         type: String,
-        required: true
+        require: true
     }
 }, {
     timestamps: true,
     toJSON: { virtuals: true },
-})
-
-AvatarSchema.virtual('url').get(function () {
-    return `http://localhost:3333/files/${this.name}`
 })
 
 
