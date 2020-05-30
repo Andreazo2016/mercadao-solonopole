@@ -35,14 +35,14 @@ PostRouter.get('/', AuthMiddleware, async (request, response) => {
 
 PostRouter.post('/', AuthMiddleware, upload.single('file'), async (request, response) => {
 
-    const { filename } = request.file;
+    const { location } = request.file;
     const { name, description, categorie_id, price } = request.body;
     const userId = request.userId;
 
     try {
         const createPostService = new CreatePostService();
 
-        const { post } = await createPostService.execute({ userId, filename, name, description, categorie_id, price })
+        const { post } = await createPostService.execute({ userId, location, name, description, categorie_id, price })
 
         return response.json(post);
 

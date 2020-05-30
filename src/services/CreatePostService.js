@@ -3,7 +3,7 @@ import Subscription from '../schemas/Subscription';
 
 
 class CreatePostService {
-  async execute({ userId, filename, name, description, categorie_id, price }) {
+  async execute({ userId, location, name, description, categorie_id, price }) {
 
     const totalPosts = await Post.find({ user: userId })
 
@@ -15,7 +15,7 @@ class CreatePostService {
     }
 
     const post = await Post.create({
-      file: filename,
+      file: location,
       name,
       description,
       price,
