@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import * as Yup from 'yup';
 import User from '../schemas/User';
+import Post from '../schemas/Post';
 import CreateSalesmanService from '../services/CreateSalesmanService';
 import UpdateInfoSalesmanService from '../services/UpdateInfoSalesmanService';
 import ChangePasswordService from '../services/ChangePasswordService';
@@ -24,11 +25,11 @@ salesmansRouter.post('/', async (request, response) => {
     try {
         await schema.validate(request.body);
 
-        const { name,username, email, role, contact, password } = request.body;
+        const { name, username, email, role, contact, password } = request.body;
 
         const createSalesmanService = new CreateSalesmanService();
 
-        const { salesman } = await createSalesmanService.execute({ name,username, email, role, contact, password });
+        const { salesman } = await createSalesmanService.execute({ name, username, email, role, contact, password });
 
         return response.json(salesman)
 
@@ -39,6 +40,75 @@ salesmansRouter.post('/', async (request, response) => {
     }
 
 })
+
+salesmansRouter.get('/', async (request, response) => {
+
+
+
+    try {
+        const salesmans = await User.find({}).populate('avatar')
+
+        return response.json(salesmans)
+
+    } catch (error) {
+        return response.status(400).json({
+            message: error.message
+        })
+    }
+
+})
+
+salesmansRouter.get('/:id/posts', async (request, response) => {
+
+    const { id } = request.params
+
+
+    try {
+        const posts = await Post.find({ user: id })
+            .populate('categorie')
+            .populate({
+                path: 'user',
+                populate: {
+                    path: 'avatar'
+                }
+            })
+
+        return response.json(posts)
+
+    } catch (error) {
+        return response.status(400).json({
+            message: error.message
+        })
+    }
+
+})
+
+salesmansRouter.get('/:id/posts/:category/category', async (request, response) => {
+
+    const { id, category } = request.params
+
+
+    try {
+        const posts = await Post.find({ user: id, categorie: category })
+            .populate('categorie')
+            .populate({
+                path: 'user',
+                populate: {
+                    path: 'avatar'
+                }
+            })
+
+        return response.json(posts)
+
+    } catch (error) {
+        return response.status(400).json({
+            message: error.message
+        })
+    }
+
+})
+
+
 
 salesmansRouter.post('/avatar', AuthMiddleware, async (request, response) => {
 
@@ -59,7 +129,7 @@ salesmansRouter.post('/avatar', AuthMiddleware, async (request, response) => {
 })
 
 
-salesmansRouter.post('/change-password',AuthMiddleware, async (request, response) => {
+salesmansRouter.post('/change-password', AuthMiddleware, async (request, response) => {
 
     const schema = Yup.object().shape({
         email: Yup.string().email(),
